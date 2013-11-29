@@ -111,6 +111,7 @@ if (confirm_sesskey($sesskey))
     $PAGE->set_pagelayout('incourse');
 
     echo $OUTPUT->header();
+    echo $OUTPUT->notification('Francisco Ballina', 'notifysuccess');
     echo $OUTPUT->notification(get_string('cambioexitoso', 'format_unidades'), 'notifysuccess');
     echo $OUTPUT->continue_button(course_get_url($course));
 
