@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/sesionclase/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/sesionclase"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="sesionclase" COMMENT="Actividades diarias descritas por cada sesion de clase">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course sesionclase activity belongs to" />
+        <FIELD NAME="name" TYPE="char" LENGTH="600" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" />
+        <FIELD NAME="intro" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Actividades de Enseñanza" />
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" COMMENT="Format of the intro portafolio (MOODLE, HTML, MARKDOWN...)" />
+        <FIELD NAME="aprendizaje" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Actividades de Aprendizaje" />
+        <FIELD NAME="aprendizajeformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the aprendizaje field (MOODLE, HTML, MARKDOWN...)" />
+        <FIELD NAME="ensenanza" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Actividades de Aprendizaje" />
+        <FIELD NAME="ensenanzaformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the aprendizaje field (MOODLE, HTML, MARKDOWN...)" />
+        <FIELD NAME="portafolio" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Actividades de Enseñanza" />
+        <FIELD NAME="portafolioformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro portafolio (MOODLE, HTML, MARKDOWN...)" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="sesionclase_programacion" COMMENT="Desglosa los cierres de cada actividad para cada grupo">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course sesionclase activity belongs to" />
+        <FIELD NAME="sesionclaseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course sesionclase activity belongs to" />
+        <FIELD NAME="modulename" TYPE="char" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Coursemoduleid sesionclase activity belongs to" />
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="name field for moodle instances" />
+        <FIELD NAME="estado" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="0.- Actividad abierta 1.- Cerrada"/>
+        <FIELD NAME="fprogramada" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="hprogramada" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="freal" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="hreal" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Observaciones de la sesion" />
+        <FIELD NAME="observacionesformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" COMMENT="Format of the intro ensenanza (MOODLE, HTML, MARKDOWN...)" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="groupid" TYPE="foreign" FIELDS="groupid" REFTABLE="groups" REFFIELDS="id" COMMENT="The groups to map to an id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="programacion" UNIQUE="false" FIELDS="course, sesionclaseid, modulename, groupid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="sesionclase_asistencias" COMMENT="Para las asistencias">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course sesionclase activity belongs to" />
+        <FIELD NAME="sesionclaseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="modulename" TYPE="char" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Coursemoduleid sesionclase activity belongs to" />
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="teacher" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="fprogramada" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="freal" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="asistio" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Observaciones de la asistencia" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="asistencias_primary" TYPE="primary" FIELDS="id" />
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" COMMENT="The user to map to an id"/>
+        <KEY NAME="teacher" TYPE="foreign" FIELDS="teacher" REFTABLE="user" REFFIELDS="id" COMMENT="The user to map to an id"/>
+        <KEY NAME="uq_asistencias" TYPE="unique" FIELDS="course, sesionclaseid, teacher, modulename, groupid, freal, userid" />
+      </KEYS>
+    </TABLE>      
+  </TABLES>
+</XMLDB>

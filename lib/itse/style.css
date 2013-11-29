@@ -1,0 +1,165 @@
+/* 
+    Document   : style
+    Created on : 21/07/2013, 08:15:03 PM
+    Author     : francisco
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body
+{
+    font-size: small;
+}
+
+table 
+{ 
+    padding: 0px;
+    border-spacing: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+table thead tr
+{
+    border-spacing: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+table thead td
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+table thead .encabezado
+{
+    text-align: left;
+}
+
+
+table thead .celdaencabezadoinicial
+{
+    border: 1px solid black;
+}
+
+table thead .celdaencabezado
+{
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+table thead .celdaencabezadofinal
+{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
+
+table thead .celdaenc_fechas
+{
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+table tfoot .celdapie
+{
+    border-top: 1px solid black;
+}
+
+table p
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+table tbody td
+{
+    vertical-align: top;
+}
+
+table tbody .celdacompetencias
+{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    page-break-after: auto;
+}
+
+table tbody .celdaactividades
+{
+    border-right: 1px solid black;
+/*    border-bottom: 1px dashed black; */
+    padding-top: 3px;
+    padding-bottom: 15px;
+}
+
+table tbody .celdaactividadesfecha
+{
+    margin-left: 5px;
+    border-right: 1px solid black;
+/*    border-bottom: 1px dashed black; */
+    padding-top: 3px;
+    padding-bottom: 15px;
+}
+
+table tbody .celdafinal
+{
+    border-right: 1px solid black;
+/*    border-bottom: 1px dashed black; */
+    padding-top: 3px;
+    padding-bottom: 15px;
+}
+
+table tbody .celdaobservaciones
+{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-top: 3px;
+    padding-bottom: 100px;
+}
+
+table tbody .celdaobservacionesfinal
+{
+    border: 1px solid black;
+    padding-top: 3px;
+    padding-bottom: 100px;
+}
+
+table tbody .celdatotales
+{
+    border-left: 1px solid black;
+}
+
+table tbody .celdatotalesfinal
+{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+table tbody .celdahorastotales
+{
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+table tbody .celdahorastotalesfinal
+{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+table caption
+{
+    text-align: right;
+}
+
+table tbody .fuenteapoyo
+{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: justify;
+}

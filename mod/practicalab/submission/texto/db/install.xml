@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/practicalab/submission/texto/db" VERSION="20120423" COMMENT="XMLDB file for Moodle mod/practicalab/submission/texto"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="practicalabsubmission_texto" COMMENT="Info about texto submission">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="practicalabment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="texto" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="The text for this online text submission."/>
+        <FIELD NAME="onlineformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The format for this online text submission."/>
+        <FIELD NAME="sexo" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Indica sexo del que envia. 1.- Hombre 2.- Mujer"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this texto submission."/>
+        <KEY NAME="practicalabment" TYPE="foreign" FIELDS="practicalabment" REFTABLE="practicalab" REFFIELDS="id" COMMENT="The practicalabment instance this online text submission relates to."/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="practicalab_submission" REFFIELDS="id" COMMENT="The submission this online text submission relates to."/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

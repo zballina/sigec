@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="course/format/unidades/db" VERSION="20130610" COMMENT="XMLDB file for Unidades por sections Moodle ITSE"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="course_unidades" COMMENT="Almacena los datos de las unidades de cada curso. Nueva versión 8">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nu_curso" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="nu_unidad" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="nu_periodo" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="estado" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Indica que el estado de la planeacion. Estados son: 0.- No realizada 1.- Realizada 2.- Enviada a coordinación 3.- Revisada y enviada para correcciones 4.- Rechazada 5.- Aprobada " />
+        <FIELD NAME="observaciones" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Indica el detalle de los estados de la planeación" />
+        <FIELD NAME="observacionesformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="clave" TYPE="char" LENGTH="12" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="nombre" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="satca" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="caracterizacion" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="caracterizacionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="objetivocurso" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="objetivocursoformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="competenciaespecifica" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="competenciaespecificaformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="competenciasgenericas" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="competenciasgenericasformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="apoyosdidacticos" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="apoyosdidacticosformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="fuentesinformacion" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="fuentesinformacionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="fecha_elabora" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="fecha_revision" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="observaciones_revision" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Observaciones en el corte" />
+        <FIELD NAME="observaciones_revisionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="course_unidades_pk" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_unidades_sections_fk" TYPE="unique" FIELDS="id, nu_curso, nu_unidad"/>
+        <KEY NAME="course_unidades_periodos_fk" TYPE="foreign" REFTABLE="course_periodos" REFFIELDS="id" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="course_periodos" COMMENT="Almacena los datos de los periodos de cada curso. Nueva versión 1">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="nu_carrera" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="actual" SEQUENCE="false" TYPE="int" LENGTH="2"  NOTNULL="true" DEFAULT="0" COMMENT="1.- Marca el actual 0.- NO es el actual" />
+        <FIELD NAME="periodo" SEQUENCE="false" TYPE="char" LENGTH="50" NOTNULL="true" COMMENT="1.- Febrero - Julio 2.- Agosto - Enero" />
+        <FIELD NAME="ano" SEQUENCE="false" TYPE="int" LENGTH="4" NOTNULL="true" />
+        <FIELD NAME="fe_inicio" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="fe_final" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS> 
+      <KEYS>
+        <KEY NAME="course_periodos_pk" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_periodos_unique" TYPE="unique" FIELDS="nu_carrera, periodo, ano" />
+        <KEY NAME="course_periodos_categories_fk" TYPE="foreign" REFTABLE="course_categories" REFFIELDS="id" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="course_semanas_efectivas" COMMENT="Almacena los datos de las semanas efectivas en cada periodo. Nueva versión 1">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="nu_carrera" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Numero de carrera (categoria del curso)"/>
+        <FIELD NAME="nu_periodo" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Numero de periodo" />
+        <FIELD NAME="nu_semana" SEQUENCE="false" TYPE="int" LENGTH="2" NOTNULL="true" COMMENT="Numero de semana, siempre debe ser entre 1 y 16 semanas"/>
+        <FIELD NAME="fe_inicio" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="fe_final" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS> 
+      <KEYS>
+        <KEY NAME="course_semanas_efectivas_pk" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_semanas_efectivas_unique" TYPE="unique" FIELDS="nu_carrera, nu_periodo, nu_semana" />
+        <KEY NAME="course_semanas_periodos_fk" TYPE="foreign" REFTABLE="course_periodos" REFFIELDS="id" FIELDS="nu_periodo"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="course_cortes_periodo" COMMENT="Almacena los datos de los periodos de cortes. Nueva versión 1">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="nu_carrera" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Numero de carrera (categoria del curso)"/>
+        <FIELD NAME="nu_periodo" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Numero de periodo" />
+        <FIELD NAME="nu_corte" SEQUENCE="false" TYPE="int" LENGTH="2" NOTNULL="true" COMMENT="Numero de semana, siempre debe ser entre 1 y 16 semanas"/>
+        <FIELD NAME="fe_inicio" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="fe_final" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS> 
+      <KEYS>
+        <KEY NAME="course_cortes_periodo_pk" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_cortes_periodo_unique" TYPE="unique" FIELDS="nu_carrera, nu_periodo, nu_corte" />
+        <KEY NAME="course_cortes_periodo_categorias_fk" TYPE="foreign" REFTABLE="course_categories" REFFIELDS="id" FIELDS="nu_carrera"/>
+        <KEY NAME="course_cortes_periodo_peridos_fk" TYPE="foreign" REFTABLE="course_periodos" REFFIELDS="id" FIELDS="nu_periodo"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

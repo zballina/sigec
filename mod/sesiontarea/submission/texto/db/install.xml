@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/sesiontarea/submission/texto/db" VERSION="20120423" COMMENT="XMLDB file for Moodle mod/sesiontarea/submission/texto"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="sesiontareasubmission_texto" COMMENT="Info about texto submission">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sesiontareament" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="texto" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="The text for this online text submission."/>
+        <FIELD NAME="onlineformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The format for this online text submission."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this texto submission."/>
+        <KEY NAME="sesiontareament" TYPE="foreign" FIELDS="sesiontareament" REFTABLE="sesiontarea" REFFIELDS="id" COMMENT="The sesiontareament instance this online text submission relates to."/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="sesiontarea_submission" REFFIELDS="id" COMMENT="The submission this online text submission relates to."/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
