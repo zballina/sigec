@@ -18,6 +18,8 @@ a few minutes:
 4) Set up a cron task to call the file admin/cron.php
    every five minutes or so.
 
+5) cambio de prueba git
+
 
 For more information, see the INSTALL DOCUMENTATION:
 
