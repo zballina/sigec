@@ -26,7 +26,7 @@ require_once("../config.php");
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir  . '/itse/carreras/periodos_form.php');
 require_once($CFG->libdir  . '/itse/carreras/periodoactual_form.php');
-require_once($CFG->libdir  . '/itse/carreras/semanas_form.php');
+//require_once($CFG->libdir  . '/itse/carreras/semanas_form.php');
 require_once($CFG->libdir  . '/itse/carreras/periodos_cortes_form.php');
 require_once($CFG->libdir . '/coursecatlib.php');
 
@@ -51,6 +51,8 @@ else
 $PAGE->set_pagelayout('coursecategory');
 $courserenderer = $PAGE->get_renderer('core', 'course');
 
+$PAGE->navigation->add('Apertura', '/course/apertura/apertura.php?nu_carrera='.$categoryid, navigation_node::TYPE_COURSE);
+ 
 if ($CFG->forcelogin)
 {
     require_login();
@@ -95,11 +97,11 @@ if ($categoryid != 0)
     if($DB->record_exists('course_periodos', array('nu_carrera' => $categoryid, 'actual' => 1)))
     {
         $periodo_actual = $DB->get_record('course_periodos', array('nu_carrera' => $categoryid, 'actual' => 1), '*', MUST_EXIST);
-        $forma_semanas = new semanas_form($PAGE->url, array(
-            'context' => $context,
-            'nu_carrera' => $periodo_actual->nu_carrera,
-            'nu_periodo' => $periodo_actual->id
-        ));    
+     //   $forma_semanas = new semanas_form($PAGE->url, array(
+      //      'context' => $context,
+      //      'nu_carrera' => $periodo_actual->nu_carrera,
+     //       'nu_periodo' => $periodo_actual->id
+     //   ));    
         $forma_cortes = new periodos_cortes_form ($PAGE->url, array(
             'context' => $context,
             'nu_carrera' => $periodo_actual->nu_carrera,

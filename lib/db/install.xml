@@ -3074,5 +3074,20 @@
         <KEY NAME="fk_backpackid" TYPE="foreign" FIELDS="backpackid" REFTABLE="badge_backpack" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
+    <TABLE NAME="itse_sigec_materias" COMMENT="Materias de la Reticula del ITSE">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Nombre de la Materia"/>
+        <FIELD NAME="clave" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Clave de la Asignatura"/>
+        <FIELD NAME="horas_teoricas" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="horas teoricas"/>
+        <FIELD NAME="horas_practicas" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="horas practicas"/>
+        <FIELD NAME="creditos" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="valor de creditos"/>
+        <FIELD NAME="semestre" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Semestre al que pertenece"/>
+        <FIELD NAME="carrera" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Carrera a la que pertenece"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>       
+      </KEYS>
+    </TABLE>
   </TABLES>
 </XMLDB>
