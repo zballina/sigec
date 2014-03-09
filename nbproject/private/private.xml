@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/localhost/htdocs/moodle/lib/itse/libsesiones.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/lib/navigationlib.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/index.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/lib/pagelib.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/lib/moodlelib.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/course/cuts/schoolcycle_cuts_form.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/grade/report/grader/lib.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/course/format/unidades/db/access.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/course/cuts/view.php</file>
+            <file>file:/var/www/localhost/htdocs/moodle/grade/report/lib.php</file>
         </group>
     </open-files>
 </project-private>

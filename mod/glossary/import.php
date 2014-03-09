@@ -46,7 +46,7 @@ $strsearch = get_string("search");
 $strimportentries = get_string('importentriesfromxml', 'glossary');
 
 $PAGE->navbar->add($strimportentries);
-$PAGE->set_title(format_string($glossary->name));
+$PAGE->set_title($glossary->name);
 $PAGE->set_heading($course->fullname);
 
 echo $OUTPUT->header();
@@ -210,7 +210,7 @@ if ($xml = glossary_read_imported_file($result)) {
                     $dupentry = $DB->record_exists_select('glossary_entries',
                                     'glossaryid = :glossaryid AND LOWER(concept) = :concept', array(
                                         'glossaryid' => $glossary->id,
-                                        'concept'    => textlib::strtolower($newentry->concept)));
+                                        'concept'    => core_text::strtolower($newentry->concept)));
                 }
                 if ($dupentry) {
                     $permissiongranted = 0;

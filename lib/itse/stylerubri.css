@@ -1,0 +1,52 @@
+/* 
+    Document   : style
+    Created on : 21/07/2013, 08:15:03 PM
+    Author     : francisco
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body
+{
+    font-size: small;
+}
+
+table 
+{ 
+    border-collapse: collapse;
+    padding: 0px;
+    border-spacing: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+    empty-cells: show;
+}
+
+table thead tr
+{
+    border-spacing: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+table thead td
+{
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+table tfoot td
+{
+    border: 1px solid black;
+}
+
+table p
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+table tbody td
+{
+    border: 1px solid black;
+}

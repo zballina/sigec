@@ -152,7 +152,8 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
         $post->groupid = groups_get_activity_group($cm);
     }
 
-    forum_set_return();
+    // Unsetting this will allow the correct return URL to be calculated later.
+    unset($SESSION->fromdiscussion);
 
 } else if (!empty($reply)) {      // User is writing a new reply
 
@@ -227,6 +228,7 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
         $post->subject = $strre.' '.$post->subject;
     }
 
+    // Unsetting this will allow the correct return URL to be calculated later.
     unset($SESSION->fromdiscussion);
 
 } else if (!empty($edit)) {  // User is editing their own post
@@ -277,8 +279,8 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
 
     $post = trusttext_pre_edit($post, 'message', $modcontext);
 
+    // Unsetting this will allow the correct return URL to be calculated later.
     unset($SESSION->fromdiscussion);
-
 
 }else if (!empty($delete)) {  // User is deleting a post
 
@@ -372,6 +374,7 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
                       forum_go_back_to("discuss.php?d=$post->discussion"));
             }
             echo $OUTPUT->header();
+            echo $OUTPUT->heading(format_string($forum->name), 2);
             echo $OUTPUT->confirm(get_string("deletesureplural", "forum", $replycount+1),
                          "post.php?delete=$delete&confirm=$delete",
                          $CFG->wwwroot.'/mod/forum/discuss.php?d='.$post->discussion.'#p'.$post->id);
@@ -385,6 +388,7 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
             }
         } else {
             echo $OUTPUT->header();
+            echo $OUTPUT->heading(format_string($forum->name), 2);
             echo $OUTPUT->confirm(get_string("deletesure", "forum", $replycount),
                          "post.php?delete=$delete&confirm=$delete",
                          $CFG->wwwroot.'/mod/forum/discuss.php?d='.$post->discussion.'#p'.$post->id);
@@ -467,7 +471,8 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum
         $PAGE->set_title(format_string($discussion->name).": ".format_string($post->subject));
         $PAGE->set_heading($course->fullname);
         echo $OUTPUT->header();
-        echo $OUTPUT->heading(get_string('pruneheading', 'forum'));
+        echo $OUTPUT->heading(format_string($forum->name), 2);
+        echo $OUTPUT->heading(get_string('pruneheading', 'forum'), 3);
         echo '<center>';
 
         include('prune.html');
@@ -504,8 +509,6 @@ if (isguestuser()) {
 if (!isset($forum->maxattachments)) {  // TODO - delete this once we add a field to the forum table
     $forum->maxattachments = 3;
 }
-
-require_once('post_form.php');
 
 $thresholdwarning = forum_check_throttling($forum, $cm);
 $mform_post = new mod_forum_post_form('post.php', array('course' => $course,
@@ -559,8 +562,9 @@ if (forum_is_subscribed($USER->id, $forum->id)) {
     $subscribe = !empty($USER->autosubscribe);
 }
 
+$postid = empty($post->id) ? null : $post->id;
 $draftid_editor = file_get_submitted_draft_itemid('message');
-$currenttext = file_prepare_draft_area($draftid_editor, $modcontext->id, 'mod_forum', 'post', empty($post->id) ? null : $post->id, mod_forum_post_form::editor_options(), $post->message);
+$currenttext = file_prepare_draft_area($draftid_editor, $modcontext->id, 'mod_forum', 'post', $postid, mod_forum_post_form::editor_options($modcontext, $postid), $post->message);
 $mform_post->set_data(array(        'attachments'=>$draftitemid,
                                     'general'=>$heading,
                                     'subject'=>$post->subject,
@@ -786,7 +790,7 @@ if ($fromform = $mform_post->get_data()) {
             }
 
             if ($subscribemessage = forum_post_subscription($discussion, $forum)) {
-                $timemessage = 4;
+                $timemessage = 6;
             }
 
             // Update completion status
@@ -862,6 +866,7 @@ $PAGE->set_title("$course->shortname: $strdiscussionname ".format_string($toppos
 $PAGE->set_heading($course->fullname);
 
 echo $OUTPUT->header();
+echo $OUTPUT->heading(format_string($forum->name), 2);
 
 // checkup
 if (!empty($parent) && !forum_user_can_see_post($forum, $discussion, $post, null, $cm)) {

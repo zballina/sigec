@@ -1,0 +1,17 @@
+<html>
+	<body>
+		<canvas id="logotipo" width="120px" height="120px" style="border: 1px solid black;" >
+			Tu navegador no soporta canvas
+		</canvas>
+		<script type="text/javascript">
+			var c=document.getElementById("logotipo");
+			var cxt = c.getContext("2d");
+			
+			cxt.fillStyle = "blue";
+			cxt.beginPath();
+			cxt.arc(60, 60, 50, 0, Math.PI*2, true);
+			cxt.closePath();
+			cxt.fill();
+		</script>
+	</body>
+</html>

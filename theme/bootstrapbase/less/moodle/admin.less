@@ -93,7 +93,8 @@
 }
 
 #page-admin-report-backups-index .backup-skipped,
-#page-admin-report-backups-index .backup-ok {
+#page-admin-report-backups-index .backup-ok,
+#page-admin-report-backups-index .backup-notyetrun {
     color: @successText;
 }
 
@@ -208,6 +209,7 @@ img.iconsmall {
 #page-admin-index .releasenoteslink,
 #page-admin-index .adminwarning,
 #page-admin-index .maturitywarning,
+#page-admin-index .testsitewarning,
 #page-admin-index .maturityinfo {
     .alert;
     width: 60%;
@@ -215,6 +217,7 @@ img.iconsmall {
     margin: auto;
 }
 #page-admin-index .maturitywarning,
+#page-admin-index .testsitewarning,
 #page-admin-index .adminwarning.maturityinfo.maturity50 {
     .alert-error;
 }
@@ -396,6 +399,31 @@ img.iconsmall {
 #page-admin-setting-editorsettingstinymce.dir-rtl .form-textarea textarea {
     text-align: left;
     direction: ltr;
+}
+
+/* Styles for flags on admin settings */
+.adminsettingsflags {
+    float: right;
+}
+
+.dir-rtl .adminsettingsflags {
+    float: left;
+}
+
+.adminsettingsflags label {
+    margin-right: 7px;
+}
+
+.dir-rtl .adminsettingsflags label {
+    margin-left: 7px;
+}
+
+.form-description {
+    clear: right;
+}
+
+.dir-rtl .form-description {
+    clear: left;
 }
 
 .form-item .form-setting .form-htmlarea {

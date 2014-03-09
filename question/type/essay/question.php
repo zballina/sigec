@@ -43,8 +43,7 @@ class qtype_essay_question extends question_with_responses {
     public $responsetemplateformat;
 
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
-        question_engine::load_behaviour_class('manualgraded');
-        return new qbehaviour_manualgraded($qa, $preferredbehaviour);
+        return question_engine::make_behaviour('manualgraded', $qa, $preferredbehaviour);
     }
 
     /**
@@ -70,10 +69,8 @@ class qtype_essay_question extends question_with_responses {
 
     public function summarise_response(array $response) {
         if (isset($response['answer'])) {
-            $formatoptions = new stdClass();
-            $formatoptions->para = false;
-            return html_to_text(format_text(
-                    $response['answer'], FORMAT_HTML, $formatoptions), 0, false);
+            return question_utils::to_plain_text($response['answer'],
+                    $response['answerformat'], array('para' => false));
         } else {
             return null;
         }
@@ -89,12 +86,12 @@ class qtype_essay_question extends question_with_responses {
 
     public function is_same_response(array $prevresponse, array $newresponse) {
         if (array_key_exists('answer', $prevresponse) && $prevresponse['answer'] !== $this->responsetemplate) {
-            $value1 = $prevresponse['answer'];
+            $value1 = (string) $prevresponse['answer'];
         } else {
             $value1 = '';
         }
         if (array_key_exists('answer', $newresponse) && $newresponse['answer'] !== $this->responsetemplate) {
-            $value2 = $newresponse['answer'];
+            $value2 = (string) $newresponse['answer'];
         } else {
             $value2 = '';
         }

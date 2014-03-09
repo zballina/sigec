@@ -38,15 +38,6 @@ $THEME->supportscssoptimisation = false;
 
 $THEME->editor_sheets = array('editor');
 
-$THEME->plugins_exclude_sheets = array(
-    'block' => array(
-        'html'
-    ),
-    'gradereport' => array(
-        'grader',
-    ),
-);
-
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
 $THEME->layouts = array(
@@ -73,7 +64,7 @@ $THEME->layouts = array(
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
     ),
-    // part of course, typical for modules - default page layout if $cm specified in require_login()
+    // part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
         'file' => 'columns3.php',
         'regions' => array('side-pre', 'side-post'),
@@ -113,7 +104,7 @@ $THEME->layouts = array(
 
     // Pages that appear in pop-up windows - no navigation, no blocks, no header.
     'popup' => array(
-        'file' => 'columns1.php',
+        'file' => 'popup.php',
         'regions' => array(),
         'options' => array('nofooter'=>true, 'nonavbar'=>true),
     ),
@@ -123,18 +114,17 @@ $THEME->layouts = array(
         'regions' => array(),
         'options' => array('nofooter'=>true, 'nocoursefooter'=>true),
     ),
-    // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible
+    // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
     'embedded' => array(
         'file' => 'embedded.php',
         'regions' => array()
     ),
     // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
-    // This must not have any blocks, and it is good idea if it does not have links to
-    // other places - for example there should not be a home link in the footer...
+    // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
+    // Please be extremely careful if you are modifying this layout.
     'maintenance' => array(
-        'file' => 'columns1.php',
+        'file' => 'maintenance.php',
         'regions' => array(),
-        'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocoursefooter'=>true, 'nocourseheader'=>true),
     ),
     // Should display the content and basic headers only.
     'print' => array(
@@ -167,7 +157,7 @@ $THEME->javascripts_footer = array(
     'moodlebootstrap',
 );
 
-if (check_browser_version('MSIE') && !check_browser_version('MSIE', '9.0')) {
+if (core_useragent::is_ie() && !core_useragent::check_ie_version('9.0')) {
     $THEME->javascripts[] = 'html5shiv';
 }
 

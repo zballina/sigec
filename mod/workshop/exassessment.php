@@ -126,7 +126,10 @@ if ($mform->is_cancelled()) {
         // Remember the last one who edited the reference assessment.
         $coredata->reviewerid = $USER->id;
     }
-    $DB->update_record('workshop_assessments', $coredata);
+    // Update the assessment data if there is something other than just the 'id'.
+    if (count((array)$coredata) > 1 ) {
+        $DB->update_record('workshop_assessments', $coredata);
+    }
 
     if (!is_null($rawgrade) and isset($data->saveandclose)) {
         if ($canmanage) {
@@ -144,7 +147,8 @@ if ($mform->is_cancelled()) {
 // output starts here
 $output = $PAGE->get_renderer('mod_workshop');      // workshop renderer
 echo $output->header();
-echo $output->heading(get_string('assessedexample', 'workshop'), 2);
+echo $output->heading(format_string($workshop->name));
+echo $output->heading(get_string('assessedexample', 'workshop'), 3);
 
 $example = $workshop->get_example_by_id($example->id);     // reload so can be passed to the renderer
 echo $output->render($workshop->prepare_example_submission(($example)));
